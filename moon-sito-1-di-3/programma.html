@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-t-titolo="titolo.programma">Programma · Moon Festival</title>
+<meta name="description" content="Il programma del Moon Festival con mappa del borgo, filtri per tipologia e ora di arrivo, schede di artisti e attività.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/sito.css">
+<link rel="stylesheet" href="css/dialogo.css">
+<link rel="stylesheet" href="css/programma.css">
+<!-- Prototipo Moon Festival · grafica di Sarah (tavole T1–T10) · testi PROVVISORI · EN tradotto da Claude, da rivedere -->
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="freccia" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></symbol></svg>
+<a class="vai-al-contenuto" href="#contenuto" data-t="gen.vai">Vai al contenuto</a>
+<header class="header">
+  <div class="contenitore header__inner">
+    <div class="header__servizi">
+      <label class="header__accessibile"><input type="checkbox" data-accessibile><span data-t="gen.accessibile">Versione accessibile</span></label>
+      <div class="lingue" role="group" aria-label="Lingua del sito" data-t-aria="gen.lingua">
+        <button type="button" lang="it" aria-label="Italiano" aria-pressed="true">IT</button>
+        <button type="button" lang="en" aria-label="English" aria-pressed="false">EN</button>
+      </div>
+    </div>
+    <div class="header__barra">
+      <a class="header__logo" href="index.html" data-interno="index.html" aria-label="Moon Festival, vai alla home" data-t-aria="gen.home"><img class="logo" src="assets/svg/logo/MoonLogo_web.svg" alt="" width="109" height="44" style="height:44px;width:auto"></a>
+      <button type="button" class="menu-bottone" aria-expanded="false" aria-controls="menu-principale"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span data-t="gen.menu">Menu</span></button>
+      <nav id="menu-principale" aria-label="Principale" data-t-aria="gen.menu.principale">
+        <ul class="menu">
+          <li><a href="il-festival.html" data-interno="il-festival.html" data-t="menu.il-festival">Il festival</a></li><li data-periodi="prima durante"><a href="programma.html" data-interno="programma.html" aria-current="page" data-t="menu.programma">Programma</a></li><li><a href="partecipa.html" data-interno="partecipa.html" data-t="menu.partecipa">Partecipa</a></li><li><a href="info-utili.html" data-interno="info-utili.html" data-t="menu.info-utili">Info utili</a></li><li><a href="accessibilita.html" data-interno="accessibilita.html" data-t="menu.accessibilita">Accessibilità</a></li><li><a href="sostenibilita.html" data-interno="sostenibilita.html" data-t="menu.sostenibilita">Sostenibilità</a></li><li><a href="edizioni.html" data-interno="edizioni.html" data-t="menu.edizioni">Edizioni</a></li><li><a href="sostieni.html" data-interno="sostieni.html" data-t="menu.sostieni">Sostieni</a></li>
+          <li>
+            <form class="cerca" role="search" onsubmit="return false">
+              <button type="button" aria-label="Cerca nel sito" data-t-aria="gen.cerca"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+              <input type="search" placeholder="Cerca" aria-label="Cerca nel sito" data-t-ph="gen.cerca.ph" data-t-aria="gen.cerca">
+            </form>
+          </li>
+        </ul>
+        <label class="menu-pannello__accessibile"><input type="checkbox" data-accessibile><span data-t="gen.accessibile">Versione accessibile</span></label>
+      </nav>
+    </div>
+  </div>
+</header>
+<main id="contenuto">
+<section class="sfondo-giallo hero-prog"><div class="contenitore hero-pagina__inner">
+<nav class="percorso" aria-label="Percorso" data-t-aria="gen.percorso"><p><a href="index.html" data-interno="index.html" data-t="gen.home.breve">Home</a> <span aria-hidden="true">/</span> <span aria-current="page" data-t="area.programma">Programma</span></p></nav>
+<p class="occhiello" data-t="prog.occhiello">Programma · archivio 2026</p>
+<div class="hero-prog__griglia"><div><h1 class="h1" data-t="prog.h1">Atti di cura.</h1></div><div>
+<p class="lead" data-t="prog.lead">Ritrova le persone, gli spettacoli e le domande della quinta edizione.</p>
+<p class="hero-prog__avviso" data-periodi="base" data-t="prog.avviso">Il programma 2027 non è ancora pubblicato.</p>
+<div class="gruppo-bottoni"><a class="bottone" href="https://shaejo.s.gy/moonfestival-programma-2026" target="_blank" rel="noopener"><span data-t="prog.pdf">Programma PDF</span><svg aria-hidden="true"><use href="#freccia"/></svg></a></div>
+</div></div></div></section>
+<section class="sfondo-viola prog-sezione" aria-labelledby="prog-titolo-elenco"><div class="contenitore prog">
+<div class="prog__mappa" id="prog-mappa">
+<h2 class="h3" data-t="prog.mappa.h">Mappa del borgo</h2>
+<div class="mappa-scorri" tabindex="0" role="region" aria-label="Mappa del borgo, scorrevole" data-t-aria="prog.mappa.scorri"><div class="mappa"><img class="mappa__fondo" src="assets/img/mappa-borgo-2026.jpg" alt="" width="2000" height="753"><div id="prog-servizi" class="mappa__servizi" aria-hidden="true"></div><div id="prog-punti" class="mappa__punti"></div></div></div>
+<div class="mappa__comandi">
+<ul class="legenda" aria-label="Legenda" data-t-aria="prog.legenda"><li><span class="legenda__segno legenda__segno--spettacolo" aria-hidden="true"></span><span data-t="prog.leg.spettacolo">Spettacoli</span></li><li><span class="legenda__segno legenda__segno--installazione" aria-hidden="true"></span><span data-t="prog.leg.installazione">Installazioni</span></li><li><span class="legenda__segno legenda__segno--talk" aria-hidden="true"></span><span data-t="prog.leg.talk">Talk</span></li><li><span class="legenda__segno legenda__segno--lab" aria-hidden="true"></span><span data-t="prog.leg.lab">Laboratori</span></li><li><span class="legenda__segno legenda__segno--mostra" aria-hidden="true"></span><span data-t="prog.leg.mostra">Mostre</span></li></ul>
+<label class="mappa__casella"><input type="checkbox" role="switch" id="prog-servizi-casella" checked><span id="prog-servizi-etichetta">Servizi sulla mappa</span></label>
+</div>
+<p id="prog-mappa-nota" class="mappa__nota"></p>
+<p class="solo-prototipo" data-periodi="base prima"><a href="programma.html?periodo=durante&amp;giorno=2026-09-05&amp;ora=21:15" data-t="prog.prova">Prototipo: guarda come cambia la pagina durante il festival (sabato alle 21.15)</a></p>
+</div>
+<div class="prog__elenco">
+<h2 class="h3" data-t="prog.elenco.h" id="prog-titolo-elenco">Tutte le attività</h2>
+<div id="prog-filtri" class="filtri"></div>
+<p id="prog-conteggio" class="prog__conteggio" role="status" aria-live="polite"></p>
+<div id="prog-elenco" class="prog-elenco"></div>
+</div>
+</div></section>
+<section class="sfondo-arancio sezione"><div class="contenitore banda">
+<p class="banda__testo" data-t="prog.cta">Trova ogni attività sulla mappa del borgo, anche offline.</p>
+<div><a class="bottone" href="https://shaejo.s.gy/moonfestival-programma-2026" target="_blank" rel="noopener"><span data-t="prog.pdf.b">Scarica il programma PDF</span><svg aria-hidden="true"><use href="#freccia"/></svg></a></div>
+</div></section>
+<dialog id="prog-scheda" class="scheda" aria-labelledby="prog-scheda-titolo"><button type="button" class="scheda__chiudi" data-chiudi aria-label="Chiudi"><span aria-hidden="true">×</span></button><div id="prog-scheda-corpo"></div></dialog>
+</main>
+<footer class="footer">
+  <div class="contenitore footer__inner">
+    <div class="footer__griglia">
+      <div><h2 class="h2" data-t="gen.footer.frase">Un piccolo pianeta.<br>Un sacco di umanità.</h2></div>
+      <div><a class="footer__luce" href="sostieni.html" data-interno="sostieni.html"><span data-t="gen.footer.luce">Dai luce al Moon</span> <svg aria-hidden="true"><use href="#freccia"/></svg></a></div>
+      <div class="footer__firma">
+        <img class="illustrazione decorativa" src="assets/svg/elementi/ELEMENTI_MoonFestival_Sito_-26.svg" alt="" width="96">
+        <p data-t="gen.footer.firma">Un progetto di Dnart APS</p>
+        <p>San Raffaele Cimena</p>
+      </div>
+    </div>
+    <div class="footer__riga">
+      <a href="mailto:moonfestival2022@gmail.com?subject=Newsletter" data-dialogo="newsletter" data-t="gen.footer.newsletter">Newsletter</a>
+      <a href="area-stampa.html" data-interno="area-stampa.html" data-t="gen.footer.stampa">Area stampa</a>
+      <a href="info-utili.html#contatti" data-interno="info-utili.html#contatti" data-t="gen.footer.contatti">Contatti</a>
+    </div>
+    <div class="footer__riga footer__riga--fondo">
+      <p>
+        <a href="mailto:moonfestival2022@gmail.com" data-dialogo="scrivici" data-t="gen.footer.scrivici">Scrivici</a>
+        <a href="https://www.instagram.com/moonfestival_/" target="_blank" rel="noopener">Instagram <svg aria-hidden="true"><use href="#freccia"/></svg><span class="sr" data-t="gen.nuova.scheda">(si apre in una nuova scheda)</span></a>
+        <a href="privacy.html" data-interno="privacy.html" data-t="gen.footer.privacy">Privacy e cookie</a>
+      </p>
+      <p>
+        <a href="edizioni.html" data-interno="edizioni.html" data-t="gen.footer.foto">Fotografie dall’archivio Moon Festival</a>
+        <a href="accessibilita.html" data-interno="accessibilita.html" data-t="gen.footer.accsito">Accessibilità del sito</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script src="js/testi.js"></script>
+<script src="js/periodi.js"></script>
+<script src="js/sito.js"></script>
+<script src="js/moduli-config.js"></script>
+<script src="js/contatti.js"></script>
+<script src="js/programma-dati.js"></script>
+<script src="js/programma.js"></script>
+</body>
+</html>

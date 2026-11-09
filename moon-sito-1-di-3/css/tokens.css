@@ -1,0 +1,92 @@
+/* ==========================================================================
+ Moon Festival · design tokens
+ Fonte: tavola "00 · Sistema di design" (Main.dc.html) + valori letti riga per riga
+ nel codice delle tavole T0–T10. Nessun valore è stato inventato:
+ [confermata] = scritta nel sistema di design o decisa in chat;
+ [dal codice] = valore usato nelle tavole ma non scritto come regola (da verificare).
+ Le tavole usano stile INLINE con questi valori: questo file è la raccolta, non è importato dalle tavole.
+ (Copia del file di Sarah in 05_layout/Consegna_Sarah_sito_Moon/css/tokens.css. Ambito: Sarah.)
+ ========================================================================== */
+:root {
+ /* ---------- Colori (HEX dal logo, tranne il viola-blu) ---------- */
+ --mf-viola-blu: #45328B; /* [confermata] colore principale: sfondo di pagina, sezioni narrative, footer, testo su bianco/giallo/rosa. Testo bianco su di esso (contrasto 10.1:1) */
+ --mf-arancio: #FB5607; /* [confermata] aree Partecipa e Sostieni. Testo viola profondo (4.8:1) */
+ --mf-giallo: #FFBE0B; /* [confermata] area Programma; dati in evidenza; indice di pagina. Testo viola-blu (6.1:1) */
+ --mf-blu: #3A86FF; /* [confermata] area Info utili. Testo viola profondo (4.5:1) */
+ --mf-rosa: #FD8DA0; /* [confermata] area Accessibilità. Testo viola-blu (4.6:1), tenuto per il contrasto */
+ --mf-verde: #ACA866; /* [confermata] area Sostenibilità. Testo viola profondo (6.4:1). Sul sito vecchio l'area era rosa: tenuto verde nel nuovo design */
+ --mf-fucsia: #FF006E; /* [confermata] SOLO decorazione e logo; testo solo se enorme (3.8:1 con bianco) */
+ --mf-viola-profondo: #251B4B; /* [confermata] il viola-blu scurito: solo testo su arancio e blu (15.7:1 con bianco) */
+ --mf-nero: #111111; /* [confermata] uso minimo: mai testi né fondi di sezione (nel logo) */
+ --mf-bianco: #FFFFFF; /* [confermata] testi su viola-blu; pagine di lettura, schede; menu */
+
+ /* Colori d'area [confermata]: Il festival·Edizioni=viola-blu; Partecipa·Sostieni=arancio; Programma=giallo; Info utili=blu; Accessibilità=rosa; Sostenibilità=verde */
+ --area-festival: var(--mf-viola-blu);
+ --area-edizioni: var(--mf-viola-blu);
+ --area-partecipa: var(--mf-arancio);
+ --area-sostieni: var(--mf-arancio);
+ --area-programma: var(--mf-giallo);
+ --area-info: var(--mf-blu);
+ --area-accessibilita: var(--mf-rosa);
+ --area-sostenibilita: var(--mf-verde);
+
+ /* Testo per area [confermata] */
+ --testo-su-viola: #FFFFFF;
+ --testo-su-giallo: var(--mf-viola-blu);
+ --testo-su-rosa: var(--mf-viola-blu);
+ --testo-su-arancio: var(--mf-viola-profondo);
+ --testo-su-blu: var(--mf-viola-profondo);
+ --testo-su-verde: var(--mf-viola-profondo);
+
+ /* Colori di servizio usati nel codice [dal codice] */
+ --mf-lilla-chiaro: #F3F0FA; /* fondo dei segnaposto di testo (riquadro tratteggiato) e dei box "Alert" */
+ --mf-lilla-filetto: #D9D4EC; /* filetti tra le righe orari della scheda */
+ --mf-segnaposto-scuro: #1B1433; /* fondo dei segnaposto foto / mappa / video */
+ --mf-filetto-su-viola: rgba(255,255,255,.35); /* filetti del footer */
+
+ /* ---------- Tipografia · Poppins (400/500/600/700/800 caricati da Google Fonts) ---------- */
+ --mf-font: 'Poppins', system-ui, sans-serif; /* [confermata] */
+ /* Display / H1: 44→96 px, peso 700, interlinea 1.0, tracking -0.035em [confermata] */
+ --h1-size: clamp(44px, 7vw, 96px); --h1-weight: 700; --h1-lh: 1; --h1-tracking: -.035em;
+ /* H2: 36→64 px, peso 700, interlinea 1.04, tracking -0.03em [confermata] */
+ --h2-size: clamp(36px, 5vw, 64px); --h2-weight: 700; --h2-lh: 1.04; --h2-tracking: -.03em;
+ /* H2 di sezione nelle pagine lunghe (Info, Accessibilità, Sostenibilità, Sostieni) [dal codice] */
+ --h2-sezione-size: clamp(30px, 3.6vw, 44px);
+ /* H3 / titolo scheda: 24→32 px, peso 700, interlinea 1.15, tracking -0.02em [confermata] */
+ --h3-size: clamp(24px, 2.6vw, 32px); --h3-weight: 700; --h3-lh: 1.15; --h3-tracking: -.02em;
+ /* Lead: 18→22 px, peso 400, interlinea 1.5 [confermata] */
+ --lead-size: clamp(18px, 1.8vw, 22px); --lead-lh: 1.5;
+ /* Testo: 18 px, peso 400, interlinea 1.6 [confermata] */
+ --testo-size: 18px; --testo-lh: 1.6;
+ /* Occhiello: 14 px maiuscolo, peso 700, interlinea 1.4, tracking +0.08em [confermata] */
+ --occhiello-size: 14px; --occhiello-weight: 700; --occhiello-tracking: .08em;
+ /* Bottone: 15 px maiuscolo, peso 500, tracking +0.04em [confermata] */
+ --bottone-size: 15px; --bottone-weight: 500; --bottone-tracking: .04em;
+ /* Voce di menu: 16 px peso 500, interlinea 1.4 [dal codice] */
+ --menu-size: 16px;
+
+ /* ---------- Misure ---------- */
+ --larghezza-max: 1340px; /* [confermata] larghezza massima contenuto */
+ --colonne: 12; --gutter: 24px; /* [confermata] colonne e distanza */
+ --margine-laterale: clamp(12px, 2vw, 20px); /* [confermata] 20 desktop / 12 telefono (dimezzato rispetto alla versione precedente) */
+ --spazio-sezione: clamp(56px, 8vw, 96px); /* [confermata] 96 desktop / 56 telefono */
+ --larghezza-testo: 600px; /* [dal codice] max-width dei paragrafi */
+ --larghezza-tavola: 1440px; /* [dal codice] larghezza delle tavole sulla tela */
+
+ /* ---------- Forme ---------- */
+ --raggio-bottone: 999px; /* [dal codice] bottoni a pillola, selettore lingua, ricerca */
+ --bordo-bottone: 2px; /* [dal codice] */
+ --altezza-bottone: 52px; /* [dal codice] min-height; padding orizzontale 28px */
+ --altezza-tile-hub: 300px; /* [dal codice] min-height; griglia 2fr testo / 1fr disegno */
+ --raggio-foto: 0; /* [confermata] foto a filo, senza margine né raggio */
+ --rapporto-foto-scheda: 4/3; /* [confermata] foto scheda attività 4:3 */
+ --rapporto-foto-split: 4/3; /* [dal codice] foto affiancate al testo: 4/3 (T5 usa 4/5) */
+ --rapporto-video-home: 16/9; /* [confermata] video a larghezza piena tra menu e hero (Home) */
+
+ /* ---------- Focus [dal codice] ---------- */
+ --focus-anello: 3px solid #fff; /* outline */
+ --focus-alone: 0 0 0 6px #251B4B; /* box-shadow */
+
+ /* ---------- Breakpoint ---------- */
+ /* NON deciso come numeri: le tavole usano flex-wrap, auto-fit/minmax e clamp(); non ci sono media query. */
+}

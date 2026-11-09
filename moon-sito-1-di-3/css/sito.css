@@ -1,0 +1,529 @@
+/* ==========================================================================
+   Moon Festival · CSS comune del sito
+   Conversione fedele delle tavole di Sarah (Claude Design, stile inline)
+   in classi riutilizzabili. Valori presi da css/tokens.css (di Sarah) e dal
+   codice delle tavole. Ambito: grafica (Sarah). Da validare con Sarah.
+   Nessuna media query: come nelle tavole, la risposta allo schermo stretto
+   è affidata a flex-wrap, auto-fit/minmax e clamp() (breakpoint non decisi).
+   ========================================================================== */
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--mf-font);
+  -webkit-font-smoothing: antialiased;
+  background: var(--mf-viola-blu);
+  color: var(--mf-bianco);
+}
+img { display: block; max-width: 100%; height: auto; }
+a:hover { text-decoration: underline !important; }
+a:focus-visible, button:focus-visible, select:focus-visible,
+input:focus-visible, summary:focus-visible {
+  outline: var(--focus-anello);
+  box-shadow: var(--focus-alone);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+.vai-al-contenuto {
+  position: absolute; left: 12px; top: -100px; z-index: 100;
+  padding: 12px 20px; background: var(--mf-bianco); color: var(--mf-viola-blu);
+  font-weight: 700;
+}
+.vai-al-contenuto:focus { top: 12px; }
+
+/* ---------- Contenitore e sezioni ---------- */
+.contenitore {
+  max-width: var(--larghezza-max);
+  margin: 0 auto;
+  padding-inline: var(--margine-laterale);
+}
+.sezione { padding-block: var(--spazio-sezione); }
+
+/* Colori di sezione: fondo + testo (combinazioni confermate da Sarah) */
+.sfondo-viola  { background: var(--mf-viola-blu); color: var(--testo-su-viola); }
+.sfondo-arancio{ background: var(--mf-arancio);   color: var(--testo-su-arancio); }
+.sfondo-giallo { background: var(--mf-giallo);    color: var(--testo-su-giallo); }
+.sfondo-blu    { background: var(--mf-blu);       color: var(--testo-su-blu); }
+.sfondo-rosa   { background: var(--mf-rosa);      color: var(--testo-su-rosa); }
+.sfondo-verde  { background: var(--mf-verde);     color: var(--testo-su-verde); }
+
+/* ---------- Tipografia ---------- */
+.occhiello {
+  margin: 0 0 20px;
+  font-size: var(--occhiello-size);
+  font-weight: var(--occhiello-weight);
+  letter-spacing: var(--occhiello-tracking);
+  text-transform: uppercase;
+}
+.h1 {
+  margin: 0;
+  font-size: var(--h1-size); line-height: var(--h1-lh);
+  letter-spacing: var(--h1-tracking); font-weight: var(--h1-weight);
+  text-wrap: balance;
+}
+.h2 {
+  margin: 0 0 24px;
+  font-size: var(--h2-size); line-height: var(--h2-lh);
+  letter-spacing: var(--h2-tracking); font-weight: var(--h2-weight);
+  text-wrap: balance;
+}
+.testo {
+  margin: 0 0 32px;
+  max-width: var(--larghezza-testo);
+  font-size: var(--testo-size); line-height: var(--testo-lh);
+}
+
+/* ---------- Bottone a contorno (pillola) ---------- */
+.bottone {
+  display: inline-flex; align-items: center; gap: 12px;
+  min-height: var(--altezza-bottone);
+  padding: 0 28px;
+  border: var(--bordo-bottone) solid currentColor;
+  border-radius: var(--raggio-bottone);
+  color: inherit;
+  font-size: var(--bottone-size); font-weight: var(--bottone-weight);
+  letter-spacing: var(--bottone-tracking); text-transform: uppercase;
+  text-decoration: none;
+}
+.bottone svg, .freccia { width: 18px; height: 18px; flex: none; }
+.gruppo-bottoni { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--mf-bianco); color: var(--mf-viola-blu);
+}
+.header__inner { padding-top: 12px; }
+.header__servizi {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;
+  gap: 8px 24px; font-size: 15px;
+}
+.header__accessibile { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.header__accessibile input { width: 22px; height: 22px; accent-color: var(--mf-viola-blu); }
+.lingue {
+  display: inline-flex; border: 2px solid var(--mf-viola-blu);
+  border-radius: 999px; overflow: hidden;
+}
+.lingue button {
+  min-width: 38px; min-height: 30px; padding: 0 8px; border: 0;
+  border-radius: 60px; background: transparent; color: var(--mf-viola-blu);
+  font: inherit; font-size: 15px; font-weight: 700; letter-spacing: .06em; cursor: pointer;
+}
+.lingue button[aria-pressed="true"] { background: var(--mf-viola-blu); color: var(--mf-bianco); }
+.header__barra {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px 40px; padding: 8px 0 16px;
+}
+.header__logo { display: inline-block; line-height: 0; }
+.header__logo svg { display: block; height: 44px; width: auto; }
+.menu {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0 40px;
+}
+.menu a {
+  display: block; padding: 12px 0;
+  color: var(--mf-viola-blu); font-size: var(--menu-size); font-weight: 500; line-height: 1.4;
+  text-decoration: none; border-bottom: 3px solid transparent;
+}
+.menu a[aria-current="page"] { border-bottom-color: var(--mf-viola-blu); }
+
+/* Ricerca: solo icona, al clic il box si allarga e compare "Cerca" */
+.cerca {
+  display: inline-flex; align-items: center; min-height: 34px; margin: 0;
+  border: 2px solid var(--mf-viola-blu); border-radius: 999px;
+  color: var(--mf-viola-blu); background: var(--mf-bianco);
+}
+.cerca button {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; padding: 0; border: 0; border-radius: 999px;
+  background: transparent; color: inherit; cursor: pointer;
+}
+.cerca input {
+  width: 0; padding: 0; border: 0; background: transparent;
+  color: var(--mf-viola-blu); font: inherit; font-size: 16px; visibility: hidden;
+  transition: width .2s ease, padding .2s ease;
+}
+.cerca input::placeholder { color: var(--mf-viola-blu); opacity: .75; }
+.cerca:focus-within input { width: 200px; padding: 0 16px 0 0; visibility: visible; }
+.cerca input:focus-visible { outline: none; box-shadow: none; }
+.cerca:focus-within { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--mf-viola-profondo); }
+
+/* ---------- Video della Home (16:9 a tutta larghezza) ---------- */
+.video {
+  position: relative; aspect-ratio: var(--rapporto-video-home); width: 100%;
+  background: var(--mf-segnaposto-scuro); color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 20px; text-align: center; padding: 24px;
+}
+.video__play {
+  display: flex; align-items: center; justify-content: center;
+  width: 88px; height: 88px; border: 3px solid #fff; border-radius: 50%;
+}
+
+/* ---------- Hero della Home ---------- */
+.hero-home__inner {
+  padding-top: clamp(56px, 8vw, 104px);
+  padding-bottom: clamp(72px, 9vw, 120px);
+}
+.hero-home__griglia {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+  gap: 64px; align-items: end;
+}
+.hero-home__titolo {
+  margin: 0;
+  font-size: clamp(52px, 9vw, 128px); line-height: .96;
+  letter-spacing: -.04em; font-weight: 700; text-wrap: balance;
+}
+/* Segno a mano: sottolineatura gialla su una sola parola (solo hero Home) */
+.segno-a-mano { display: inline-block; position: relative; }
+.segno-a-mano svg {
+  position: absolute; left: -1%; bottom: -.06em; width: 102%; height: .16em; overflow: visible;
+}
+.hero-home__date {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; font-weight: 700; letter-spacing: -.02em;
+}
+.hero-home__luogo { margin: 0 0 32px; font-size: 22px; }
+
+/* ---------- Foto + testo (alternati) ---------- */
+.split { display: flex; flex-wrap: wrap; flex-direction: row; }
+.split--inverso { flex-direction: row-reverse; }
+.split__foto { flex: 1 1 480px; min-width: 0; position: relative; line-height: 0; }
+.split__foto-riserva { aspect-ratio: 4 / 5; }          /* T1: 4:5 */
+.split__foto--4-3 .split__foto-riserva { aspect-ratio: 4 / 3; }
+.split__foto-cornice { position: absolute; inset: 0; overflow: hidden; }
+.split__foto-cornice img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+}
+.credito {
+  position: absolute; top: 16px; left: 16px; padding: 8px 14px;
+  background: var(--mf-viola-blu); color: #fff;
+  font-size: 14px; line-height: 1.3; letter-spacing: 0;
+}
+/* Il testo segue il bordo del contenitore da 1340 px anche se la foto va a filo */
+.split__testo {
+  flex: 1 1 480px; min-width: 0; display: flex; align-items: center;
+  padding-block: clamp(24px, 3.5vw, 48px);
+  padding-left: clamp(24px, 4.5vw, 64px);
+  padding-right: max(var(--margine-laterale), calc((100vw - var(--larghezza-max)) / 2 + var(--margine-laterale)));
+}
+.split--inverso .split__testo {
+  padding-right: clamp(24px, 4.5vw, 64px);
+  padding-left: max(var(--margine-laterale), calc((100vw - var(--larghezza-max)) / 2 + var(--margine-laterale)));
+}
+.split__colonna { width: 100%; max-width: var(--larghezza-testo); }
+.illustrazione { display: block; height: auto; margin: 0 0 24px; }
+
+/* ---------- Dati in evidenza ---------- */
+.dati {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 32px; align-items: start;
+}
+.dati__numero {
+  margin: 0 0 12px;
+  font-size: clamp(56px, 8vw, 112px); line-height: 1; letter-spacing: -.04em; font-weight: 700;
+}
+.dati .occhiello { margin: 0; }
+
+/* ---------- Righe di azione ---------- */
+.riga-azione {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 24px 40px; margin-top: 24px;
+}
+.riga-azione--prima { margin-top: 56px; padding-top: 32px; border-top: 2px solid currentColor; }
+.riga-azione p { margin: 0; font-size: 22px; font-weight: 700; }
+.riga-azione .etichetta-box { padding: 0 18px; box-shadow: inset 0 0 0 2px currentColor; }
+
+/* ---------- Elenco di inviti (Partecipa, in Home) ---------- */
+.inviti__testa {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: 24px 40px; margin-bottom: 48px;
+}
+.inviti__testa .h2 { margin: 0; }
+.inviti {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+  gap: 56px; align-items: start;
+}
+.invito {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+  padding: 32px 0 40px; border-top: 2px solid currentColor;
+  color: inherit; text-decoration: none;
+}
+.invito__titolo {
+  display: block; margin-bottom: 12px;
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -.025em; font-weight: 700;
+}
+.invito__testo { display: block; font-size: 19px; line-height: 1.5; }
+.invito__freccia {
+  display: flex; flex: none; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border: 2px solid currentColor;
+}
+.invito__freccia svg { width: 26px; height: 26px; }
+
+/* ---------- Banda newsletter ---------- */
+.banda {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+  gap: 40px; align-items: center;
+}
+.banda__testo {
+  margin: 0; max-width: 560px;
+  font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; font-weight: 500;
+}
+
+/* ---------- Footer ---------- */
+.footer { background: var(--mf-viola-blu); color: #fff; }
+.footer__inner { padding-top: clamp(56px, 8vw, 88px); padding-bottom: 24px; }
+.footer__griglia {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 40px; align-items: start;
+}
+.footer__griglia .h2 { margin: 0; }
+.footer__luce {
+  display: inline-flex; align-items: center; gap: 12px;
+  color: #fff; font-size: 28px; font-weight: 500; text-decoration: none;
+}
+.footer__luce svg { width: 26px; height: 26px; }
+.footer__firma p { margin: 0 0 8px; font-size: 16px; }
+.footer__firma p + p { margin: 0; font-size: 15px; }
+.footer__riga {
+  display: flex; flex-wrap: wrap; gap: 0 32px;
+  margin-top: 56px; padding-top: 24px;
+  border-top: 1px solid var(--mf-filetto-su-viola); font-size: 16px;
+}
+.footer__riga--fondo { justify-content: space-between; margin-top: 40px; font-size: 15px; }
+.footer__riga a { color: #fff; padding: 10px 0; display: inline-block; }
+.footer__riga p { margin: 0; display: flex; flex-wrap: wrap; gap: 0 16px; }
+.footer__riga p + p { gap: 0 24px; }
+.footer__riga svg { width: 18px; height: 18px; vertical-align: middle; }
+
+/* ==========================================================================
+   Componenti delle pagine interne (dalle tavole T2–T10 di Sarah)
+   ========================================================================== */
+:root { --altezza-header: 120px; }
+[id] { scroll-margin-top: var(--altezza-header); }
+
+/* Hero di pagina: fascia nel colore d'area con percorso, occhiello, H1 e lead */
+.hero-pagina__inner {
+  padding-top: clamp(56px, 7vw, 88px);
+  padding-bottom: clamp(64px, 8vw, 112px);
+}
+.percorso { font-size: 15px; margin: 0 0 40px; }
+.percorso p { margin: 0; }
+.percorso a { color: inherit; }
+.percorso [aria-current] { font-weight: 700; }
+.lead {
+  margin: 24px 0 0; max-width: 640px;
+  font-size: var(--lead-size); line-height: var(--lead-lh);
+}
+
+/* Sottomenu: fascia nel colore d'area, voce corrente e hover bianche, senza filetti */
+.sottomenu ul {
+  max-width: var(--larghezza-max); margin: 0 auto; padding: 0 var(--margine-laterale);
+  list-style: none; display: flex; flex-wrap: wrap; gap: 0;
+}
+.sottomenu li { flex: 1 1 160px; }
+.sottomenu a {
+  display: block; padding: 14px 8px; text-align: center;
+  color: inherit; font-size: 16px; font-weight: 500; text-decoration: none;
+  transition: background-color .2s ease;
+}
+.sottomenu a:hover, .sottomenu a:focus-visible, .sottomenu a[aria-current] {
+  background: var(--mf-bianco); font-weight: 700; text-decoration: none !important;
+}
+.sottomenu.sfondo-viola a:hover, .sottomenu.sfondo-viola a:focus-visible,
+.sottomenu.sfondo-viola a[aria-current] { color: var(--mf-viola-blu); }
+
+/* Pagine lunghe (Info utili): colonna di lettura con sezioni ancorate */
+.pagina-lunga { max-width: 880px; }
+.blocco { padding-bottom: 64px; }
+.h2-sezione {
+  margin: 0 0 24px;
+  font-size: var(--h2-sezione-size); line-height: 1.04;
+  letter-spacing: -.03em; font-weight: 700; text-wrap: balance;
+}
+.h3 {
+  margin: 0 0 12px;
+  font-size: var(--h3-size); line-height: var(--h3-lh);
+  letter-spacing: var(--h3-tracking); font-weight: var(--h3-weight);
+}
+.testo--stretto { margin-bottom: 16px; }
+.segnaposto-scuro {
+  aspect-ratio: 16 / 9; background: var(--mf-segnaposto-scuro); color: #fff;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 16px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase;
+}
+.faq details { border-top: 1px solid currentColor; padding: 20px 0; }
+.faq summary { cursor: pointer; font-size: 20px; font-weight: 600; line-height: 1.4; }
+.faq details > div { padding-top: 12px; }
+.faq__fine { border-top: 1px solid currentColor; }
+
+/* Scheda dati (Il festival): dove, chi, quando, ingresso */
+.scheda-dati {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 32px; margin: 0;
+}
+.scheda-dati div { border-top: 2px solid currentColor; padding-top: 16px; }
+.scheda-dati dt { margin: 0 0 8px; font-size: var(--occhiello-size); font-weight: 700;
+  letter-spacing: var(--occhiello-tracking); text-transform: uppercase; }
+.scheda-dati dd { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.3; }
+
+/* Elenco a voci (supporto, servizi, quattro assi, cifre) */
+.voci {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 32px; margin: 32px 0 0; padding: 0; list-style: none;
+}
+.voci li { border-top: 2px solid currentColor; padding-top: 16px; }
+.voci h3 { margin: 0 0 8px; font-size: 22px; font-weight: 700; line-height: 1.3; }
+.voci p { margin: 0; font-size: 18px; line-height: 1.6; }
+.voci__numero { display: block; font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -.03em; margin-bottom: 12px; }
+
+/* Tile dell'Hub: 2/3 testo, 1/3 disegno centrato */
+.hub {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr));
+  gap: 0;
+}
+.tile {
+  --c: var(--mf-arancio); --t: var(--mf-viola-profondo);
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 2fr 1fr; align-items: stretch;
+  min-height: var(--altezza-tile-hub);
+  background: var(--c); color: var(--t); text-decoration: none;
+  transition: background-color .2s ease, color .2s ease;
+}
+.tile:hover, .tile:focus-visible { background: var(--mf-bianco); color: var(--t); text-decoration: none !important; }
+.tile:hover .tile__bottone, .tile:focus-visible .tile__bottone { border-color: var(--c); }
+.tile__testo { display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: 40px 16px 40px 40px; min-width: 0; }
+.tile__titolo { display: block; margin-bottom: 12px; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; letter-spacing: -.02em; font-weight: 700; }
+.tile__frase { display: block; max-width: 440px; font-size: 17px; line-height: 1.5; }
+.tile__bottone { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border: 2px solid currentColor; }
+.tile__bottone svg { width: 26px; height: 26px; }
+.tile__disegno { display: flex; align-items: center; justify-content: center; padding: 24px 24px 24px 8px; min-width: 0; }
+.tile__disegno img { width: 110px; }
+
+/* Edizioni */
+.edizioni {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+  gap: 56px 40px;
+}
+.edizione { border-top: 2px solid currentColor; padding-top: 24px; }
+.edizione .h2 { margin-bottom: 8px; }
+.edizione p { margin: 0 0 16px; font-size: 18px; line-height: 1.6; }
+.elenco-link { margin: 16px 0 0; padding: 0; list-style: none; }
+.elenco-link a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; color: inherit; font-size: 17px; }
+.elenco-link svg { width: 16px; height: 16px; }
+
+/* Modulo */
+.modulo { display: grid; gap: 20px; max-width: 640px; margin-top: 32px; }
+.modulo label { display: block; margin-bottom: 8px; font-size: 16px; font-weight: 600; }
+.modulo input, .modulo textarea {
+  width: 100%; min-height: 52px; padding: 12px 16px;
+  border: 2px solid currentColor; border-radius: 0; background: transparent;
+  color: inherit; font: inherit; font-size: 18px;
+}
+.modulo textarea { min-height: 160px; resize: vertical; }
+.modulo__consenso { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
+.modulo__consenso input { width: 24px; min-height: 24px; height: 24px; flex: none; margin-top: 2px; }
+.modulo button.bottone { background: transparent; cursor: pointer; justify-self: start; }
+
+/* Tre modi di donare */
+.dona {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 40px; margin-top: 40px;
+}
+.dona > div { border-top: 2px solid currentColor; padding-top: 24px; }
+.dona p { margin: 0 0 24px; font-size: 18px; line-height: 1.6; }
+.qr-segnaposto { width: 160px; aspect-ratio: 1; border: 2px dashed currentColor; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 13px; padding: 12px; margin-bottom: 16px; }
+
+/* ==========================================================================
+   MENU MOBILE · PROPOSTA DA VALIDARE CON SARAH (breakpoint 960 px)
+   Sotto i 960 px: logo + IT/EN + pulsante "Menu"; il menu si apre a tendina
+   sotto l'header, voci grandi (48 px), ricerca a tutta larghezza.
+   ========================================================================== */
+.menu-bottone { display: none; }
+@media (max-width: 960px) {
+  :root { --altezza-header: 72px; }
+  .header__inner { padding-top: 8px; }
+  .header__servizi { position: absolute; top: 14px; right: calc(var(--margine-laterale) + 108px); gap: 8px; }
+  .header__servizi .header__accessibile { display: none; }
+  .header__barra { flex-wrap: nowrap; padding: 4px 0 12px; }
+  .header__logo img { height: 36px !important; }
+  .menu-bottone {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px;
+    border: 2px solid var(--mf-viola-blu); border-radius: 999px; background: var(--mf-bianco);
+    color: var(--mf-viola-blu); font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+  .menu-bottone svg { width: 18px; height: 18px; }
+  .header nav[aria-label] { display: none; }
+  .header.menu-aperto nav[aria-label] {
+    display: block; position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--mf-bianco); border-top: 2px solid var(--mf-viola-blu);
+    max-height: calc(100vh - var(--altezza-header)); overflow-y: auto;
+    padding: 8px var(--margine-laterale) 24px; box-shadow: 0 12px 24px rgba(37, 27, 75, .18);
+  }
+  .header.menu-aperto .menu { flex-direction: column; align-items: stretch; gap: 0; }
+  .header.menu-aperto .menu a { padding: 14px 0; font-size: 20px; border-bottom: 1px solid #D9D4EC; }
+  .header.menu-aperto .menu a[aria-current="page"] { font-weight: 700; border-bottom: 3px solid var(--mf-viola-blu); }
+  .header.menu-aperto .menu li:last-child { padding-top: 16px; }
+  .header.menu-aperto .cerca { width: 100%; }
+  .header.menu-aperto .cerca input { width: 100%; padding: 0 16px 0 0; visibility: visible; }
+  .menu-pannello__accessibile { display: flex !important; }
+  .split__testo { padding-left: var(--margine-laterale) !important; padding-right: var(--margine-laterale) !important; }
+  .tile { grid-template-columns: 1fr 96px; }
+  .tile__testo { padding: 28px 8px 28px 24px; gap: 28px; }
+  .tile__disegno img { width: 72px; }
+  .riga-azione p { font-size: 18px; }
+}
+.menu-pannello__accessibile { display: none; align-items: center; gap: 12px; min-height: 48px; padding: 12px 0 0; font-size: 18px; color: var(--mf-viola-blu); }
+.menu-pannello__accessibile input { width: 24px; height: 24px; accent-color: var(--mf-viola-blu); }
+@media (max-width: 420px) {
+  .header__servizi { right: calc(var(--margine-laterale) + 100px); }
+  .menu-bottone span { display: none; }
+  .menu-bottone { padding: 0 12px; }
+  .header__servizi { right: calc(var(--margine-laterale) + 60px); }
+}
+
+/* ==========================================================================
+   VERSIONE ACCESSIBILE · bianco e nero, nessun colore di marca (WCAG 2.2 AA)
+   Fondo bianco, testo nero, link sottolineati, focus nero spesso,
+   bottoni bianchi con bordo nero, selezionato = fondo nero e testo bianco.
+   Le illustrazioni decorative si nascondono; le foto informative restano.
+   ========================================================================== */
+html.accessibile body,
+html.accessibile .header, html.accessibile .footer, html.accessibile section,
+html.accessibile .sottomenu, html.accessibile .tile, html.accessibile [class*="sfondo-"] {
+  background: #FFFFFF !important; color: #000000 !important;
+}
+html.accessibile section, html.accessibile .footer { border-top: 2px solid #000; }
+html.accessibile a { color: #000 !important; text-decoration: underline !important; }
+html.accessibile .bottone, html.accessibile .menu-bottone, html.accessibile .lingue,
+html.accessibile .cerca, html.accessibile .tile__bottone, html.accessibile .invito__freccia {
+  background: #FFFFFF !important; color: #000 !important; border-color: #000 !important;
+}
+html.accessibile [aria-current], html.accessibile .lingue button[aria-pressed="true"] {
+  background: #000 !important; color: #FFF !important;
+}
+html.accessibile .menu a[aria-current] { background: transparent !important; color: #000 !important; border-bottom-color: #000 !important; font-weight: 700; }
+html.accessibile .lingue button { color: #000 !important; }
+html.accessibile .credito { background: #000 !important; color: #FFF !important; }
+html.accessibile img.illustrazione, html.accessibile .tile__disegno,
+html.accessibile .segno-a-mano svg, html.accessibile .decorativa { display: none !important; }
+html.accessibile .tile { grid-template-columns: 1fr; border: 2px solid #000; }
+html.accessibile .video, html.accessibile .segnaposto-scuro {
+  background: #FFF !important; color: #000 !important; border: 2px solid #000;
+}
+html.accessibile .video__play { border-color: #000; }
+html.accessibile .video__play svg { fill: #000; }
+html.accessibile *:focus-visible { outline: 3px solid #000 !important; outline-offset: 3px; box-shadow: 0 0 0 6px #FFF !important; }
+html.accessibile * { transition: none !important; text-shadow: none !important; }
+html.accessibile .header__accessibile input, html.accessibile .menu-pannello__accessibile input { accent-color: #000; }
+
+/* ==========================================================================
+   PROPOSTA PER SARAH (2026-11-09, richiesta di Simone): header a tutta larghezza su computer.
+   Logo a sinistra e menu a destra arrivano ai bordi dello schermo invece di fermarsi a 1340px.
+   Il contenuto delle pagine resta largo come prima. Per tornare indietro basta cancellare questo blocco.
+   ========================================================================== */
+.header > .contenitore, .header .header__inner { max-width: none; padding-inline: clamp(12px, 3vw, 48px); }

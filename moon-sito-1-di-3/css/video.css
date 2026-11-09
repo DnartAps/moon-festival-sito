@@ -1,0 +1,27 @@
+/* Video della Home · PROPOSTA DA VALIDARE CON SARAH
+   Il video sta sotto il blocco viola con titolo e date, a tutta larghezza.
+   Su schermi larghi non è più 16:9 pieno: l'altezza è limitata (circa 60% dello schermo) e il video
+   viene tagliato sopra e sotto, così si capisce che la pagina continua.
+   Due bottoni rotondi in basso a destra: audio sì/no e pausa/play, bianchi su viola profondo al 72%. */
+.video--vimeo {
+  --h: min(56.25vw, 62vh);
+  aspect-ratio: auto; height: var(--h); padding: 0; overflow: hidden; background: var(--mf-viola-profondo);
+}
+.video__iframe {
+  position: absolute; top: 50%; left: 50%; border: 0; pointer-events: none;
+  width: max(100%, calc(var(--h) * 16 / 9)); height: max(100%, calc(100vw * 9 / 16));
+  transform: translate(-50%, -50%);
+}
+.video__comandi { position: absolute; right: 16px; bottom: 16px; z-index: 1; display: flex; gap: 10px; }
+.video__bottone { display: grid; place-items: center; width: 52px; height: 52px; padding: 0;
+  border: 2px solid #fff; border-radius: 50%; background: rgba(37, 27, 75, .72); color: #fff; fill: #fff; cursor: pointer; }
+.video__bottone svg { width: 22px; height: 22px; }
+.video__pausa .ico-play, .video__pausa.attivo .ico-pausa,
+.video__audio .ico-audio, .video__audio.attivo .ico-muto { display: none; }
+.video__pausa.attivo .ico-play, .video__audio.attivo .ico-audio { display: block; }
+.video__bottone:hover { background: var(--mf-viola-profondo); }
+.video__bottone:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 6px var(--mf-viola-profondo); }
+.video__link { color: #fff; position: absolute; inset: 0; display: grid; place-items: center; }
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (min-width: 900px) { .video__comandi { right: 24px; bottom: 24px; } }
+html.accessibile .video__bottone { background: #000; border-color: #fff; }

@@ -1,0 +1,123 @@
+/* ==========================================================================
+   MODULI DI CANDIDATURA · PROPOSTA DA VALIDARE CON SARAH
+   Ispirazione: modulo di genwork.unimi.it (domande grandi, scelte a bottoni); il modulo è diviso in passi, una sezione alla volta.
+   Il modulo sta su fondo bianco (il bianco è il colore di Sarah per "pagine di lettura, elenchi, schede"),
+   testo viola-blu; bottoni di scelta a pillola come i filtri del programma.
+   ========================================================================== */
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Riepilogo della call (sezione colorata sopra il modulo) */
+.call-info { display: grid; gap: 0; margin: 32px 0 0; max-width: 820px; }
+.call-info div { display: grid; grid-template-columns: minmax(120px, 220px) minmax(0, 1fr); gap: 4px 24px; padding: 14px 0; border-top: 1px solid currentColor; }
+.call-info div:last-child { border-bottom: 1px solid currentColor; }
+.call-info dt { font-weight: 700; font-size: 16px; }
+.call-info dd { margin: 0; font-size: 18px; }
+@media (max-width: 640px) { .call-info div { grid-template-columns: minmax(0, 1fr); } }
+
+/* Sezione del modulo */
+.mod-sezione { background: var(--mf-bianco); color: var(--mf-viola-blu); padding-block: var(--spazio-sezione); }
+.mod-sezione .contenitore > * { max-width: 820px; }
+.mod-sezione a { color: var(--mf-viola-blu); }
+.mod-sezione :focus-visible { outline: 3px solid var(--mf-viola-blu); outline-offset: 3px; box-shadow: 0 0 0 6px var(--mf-bianco); }
+.mod-nota { margin: 0 0 24px; font-size: 16px; }
+.mod-form { display: grid; gap: 56px; }
+.mod-trappola { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Blocchi */
+.mod-blocco { display: grid; gap: 36px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.mod-blocco__titolo { display: flex; align-items: baseline; gap: 14px; width: 100%; margin: 0 0 4px; padding: 0 0 14px; border-bottom: 3px solid var(--mf-viola-blu); font-size: clamp(30px, 4vw, 44px); line-height: 1.05; font-weight: 700; letter-spacing: -.03em; }
+.mod-blocco__num { font-size: 14px; font-weight: 700; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+.mod-blocco__intro { margin: -16px 0 0; font-size: 17px; }
+
+/* Passi (modulo a sezioni) */
+.mod-passi { margin: 0 0 40px; }
+.mod-passi ol { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 14px; padding: 0; list-style: none; }
+.mod-passi li > span, .mod-passi li > button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--mf-viola-blu); font: inherit; font-size: 15px; font-weight: 600; }
+.mod-passi li > button { cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.mod-passi__n { display: inline-grid; place-items: center; width: 30px; height: 30px; border: 2px solid var(--mf-viola-blu); border-radius: 50%; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; text-decoration: none; }
+.mod-passi li.ora .mod-passi__n, .mod-passi li.fatto .mod-passi__n { background: var(--mf-viola-blu); color: var(--mf-bianco); }
+.mod-passi li.ora .mod-passi__t { font-weight: 800; }
+.mod-passi__barra { height: 6px; background: var(--mf-lilla-chiaro); }
+.mod-passi__barra span { display: block; height: 100%; background: var(--mf-viola-blu); transition: width .3s; }
+@media (max-width: 640px) { .mod-passi li:not(.ora) .mod-passi__t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { .mod-passi__barra span { transition: none; } }
+.mod-blocco[hidden] { display: none; }
+.mod-blocco__titolo:focus { outline: none; }
+.mod-blocco__titolo:focus-visible { outline: 3px solid var(--mf-viola-blu); outline-offset: 6px; }
+
+/* Domande grandi */
+.mod-campo { display: grid; gap: 10px; min-width: 0; }
+.mod-gruppo { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.mod-domanda { display: block; padding: 0; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.25; font-weight: 700; letter-spacing: -.015em; text-wrap: balance; }
+.mod-stella { color: inherit; }
+.mod-aiuto { margin: -4px 0 0; font-size: 16px; line-height: 1.5; max-width: 62ch; }
+.mod-input { width: 100%; min-height: 56px; padding: 12px 16px; border: 2px solid var(--mf-viola-blu); border-radius: 0; background: var(--mf-bianco); color: var(--mf-viola-profondo); font: inherit; font-size: 18px; }
+.mod-input--corto { max-width: 180px; }
+.mod-area { min-height: 150px; resize: vertical; line-height: 1.5; }
+.mod-input[aria-invalid="true"], .mod-gruppo[aria-invalid="true"] .mod-bottone span { border-color: #C0144B; }
+.mod-conta { margin: 0; font-size: 14px; text-align: right; font-variant-numeric: tabular-nums; }
+.mod-etichetta { display: block; margin: 6px 0 6px; font-size: 16px; font-weight: 600; }
+
+/* Scelte a bottoni (radio e caselle vere, nascoste solo alla vista) */
+.mod-bottoni { display: flex; flex-wrap: wrap; gap: 10px; }
+.mod-bottone { position: relative; display: inline-flex; }
+.mod-bottone input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.mod-bottone span { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 10px 20px; border: 2px solid var(--mf-viola-blu); border-radius: 999px; font-size: 16px; font-weight: 500; line-height: 1.3; }
+.mod-bottone input[type="checkbox"] + span::before { content: ""; width: 14px; height: 14px; border: 2px solid currentColor; border-radius: 3px; flex: none; }
+.mod-bottone input:checked + span { background: var(--mf-viola-blu); color: var(--mf-bianco); font-weight: 700; }
+.mod-bottone input[type="checkbox"]:checked + span::before { content: "✓"; display: grid; place-items: center; font-size: 11px; line-height: 1; border-color: var(--mf-bianco); }
+.mod-bottone input:hover + span { background: var(--mf-lilla-chiaro); }
+.mod-bottone input:checked:hover + span { background: var(--mf-viola-profondo); }
+.mod-bottone input:focus-visible + span { outline: 3px solid var(--mf-viola-blu); outline-offset: 3px; }
+.mod-altro { margin-top: 4px; max-width: 520px; }
+
+/* Consensi */
+.mod-consenso { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 14px; align-items: start; font-size: 17px; line-height: 1.5; }
+.mod-consenso input { width: 26px; height: 26px; margin: 1px 0 0; accent-color: var(--mf-viola-blu); }
+.mod-campo--consenso + .mod-campo--consenso { margin-top: -18px; }
+
+/* File */
+.mod-file { display: grid; gap: 10px; }
+.mod-file__input { font: inherit; font-size: 16px; color: var(--mf-viola-blu); max-width: 100%; }
+.mod-file__input::file-selector-button { min-height: 48px; margin-right: 14px; padding: 0 22px; border: 2px solid var(--mf-viola-blu); border-radius: 999px; background: var(--mf-bianco); color: var(--mf-viola-blu); font: inherit; font-weight: 500; cursor: pointer; }
+.mod-file__lista { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.mod-file__lista li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 8px 12px; background: var(--mf-lilla-chiaro); font-size: 15px; }
+.mod-file__lista .mod-file__vuoto { background: none; padding: 0; }
+.mod-file__togli { min-height: 36px; padding: 0 14px; border: 2px solid var(--mf-viola-blu); border-radius: 999px; background: transparent; color: var(--mf-viola-blu); font: inherit; font-size: 14px; cursor: pointer; }
+
+/* Errori */
+.mod-errore { margin: 0; padding-left: 12px; border-left: 4px solid #C0144B; color: #A3103F; font-size: 16px; font-weight: 600; }
+.mod-riepilogo, .mod-esito { scroll-margin-top: 140px; }
+.mod-riepilogo { margin: 0 0 32px; padding: 20px 24px; border: 3px solid #C0144B; background: #FFF4F7; color: var(--mf-viola-profondo); }
+.mod-riepilogo__titolo { margin: 0 0 8px; font-size: 22px; font-weight: 700; }
+.mod-riepilogo ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.mod-riepilogo a { color: #A3103F; font-weight: 600; }
+
+/* Invio ed esiti */
+.mod-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; padding-top: 8px; }
+.mod-avanti { color: var(--mf-viola-blu); border-color: var(--mf-viola-blu); background: transparent; cursor: pointer; }
+.mod-avanti:hover { background: var(--mf-viola-blu); color: var(--mf-bianco); }
+.mod-indietro { min-height: 48px; padding: 0 4px; border: 0; background: none; color: var(--mf-viola-blu); font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; }
+.mod-indietro:hover { text-decoration: underline; text-underline-offset: 3px; }
+.mod-azioni .mod-svuota { margin-left: auto; }
+.mod-invia { color: var(--mf-viola-blu); border-color: var(--mf-viola-blu); background: transparent; cursor: pointer; }
+.mod-invia:hover { background: var(--mf-viola-blu); color: var(--mf-bianco); }
+.mod-invia[disabled] { opacity: .5; cursor: progress; }
+.mod-svuota { min-height: 44px; padding: 0; border: 0; background: none; color: var(--mf-viola-blu); font: inherit; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.mod-stato { margin: 0; font-size: 16px; font-weight: 600; }
+.mod-esito { margin: 0 0 32px; padding: 24px; border: 3px solid var(--mf-viola-blu); background: var(--mf-lilla-chiaro); }
+.mod-esito--ok { background: var(--mf-giallo); border-color: var(--mf-giallo); }
+.mod-esito__titolo { margin: 0 0 8px; font-size: clamp(22px, 3vw, 30px); line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
+.mod-esito p { margin: 0 0 8px; font-size: 17px; }
+.mod-prova { margin: 16px 0 0; display: grid; }
+.mod-prova div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 4px 16px; padding: 6px 0; border-top: 1px solid var(--mf-lilla-filetto); font-size: 14px; }
+.mod-prova dt { font-weight: 700; } .mod-prova dd { margin: 0; overflow-wrap: anywhere; }
+
+/* Versione accessibile: bianco e nero */
+html.accessibile .mod-sezione, html.accessibile .mod-sezione a { color: #000; }
+html.accessibile .mod-input, html.accessibile .mod-bottone span, html.accessibile .mod-blocco__titolo, html.accessibile .mod-file__togli { border-color: #000; color: #000; }
+html.accessibile .mod-bottone input:checked + span { background: #000; color: #FFF; }
+html.accessibile .mod-stella { color: #000; }
+html.accessibile .mod-esito, html.accessibile .mod-esito--ok { background: #FFF; border-color: #000; }
+.menu a[aria-current="location"] { border-bottom-color: var(--mf-viola-blu); } /* sezione corrente nel menu (pagine delle call) */
+#modulo { scroll-margin-top: 110px; }

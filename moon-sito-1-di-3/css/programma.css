@@ -1,0 +1,304 @@
+/* ==========================================================================
+   PAGINA PROGRAMMA · PROPOSTA DA VALIDARE CON SARAH
+   La tavola T4 di Sarah è "da riprendere": questa è una proposta di layout
+   (mappa visibile in testa, didascalia compatta, filtri, griglia come la tavola T4, scheda in finestra con tendine).
+   Usa solo i token di css/tokens.css. Colori per tipologia: come la legenda della mappa 2026 (spettacoli magenta, installazioni arancio, laboratori blu, talk giallo) + mostre rosa.
+   ========================================================================== */
+.anteprima-periodo {
+  margin: 0; padding: 8px var(--margine-laterale); text-align: center;
+  background: var(--mf-viola-profondo); color: var(--mf-bianco); font-size: 14px; font-weight: 700;
+}
+.hero-prog .hero-pagina__inner { padding-top: clamp(28px, 4vw, 48px); padding-bottom: clamp(32px, 4vw, 48px); }
+.hero-prog .percorso { margin-bottom: 20px; }
+.hero-prog__griglia { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 16px 48px; align-items: end; }
+.hero-prog .lead { margin-top: 0; }
+.hero-prog__avviso { margin: 16px 0 0; font-size: 18px; font-weight: 700; }
+.hero-prog .gruppo-bottoni { margin-top: 20px; }
+
+/* Colori per tipologia (fondo + testo come da combinazioni di Sarah) */
+/* spettacoli: il magenta della mappa 2026 (#D93078), testo bianco 4.5:1 · da allineare con Sarah */
+.punto--spettacolo, .pfoto--spettacolo, .legenda__segno--spettacolo { --pc: #D93078; --pt: var(--mf-bianco); }
+.punto--installazione, .pfoto--installazione, .legenda__segno--installazione { --pc: var(--mf-arancio); --pt: var(--mf-viola-profondo); }
+.punto--talk, .pfoto--talk, .legenda__segno--talk { --pc: var(--mf-giallo); --pt: var(--mf-viola-blu); }
+.punto--lab, .pfoto--lab, .legenda__segno--lab { --pc: var(--mf-blu); --pt: var(--mf-viola-profondo); }
+.punto--mostra, .pfoto--mostra, .legenda__segno--mostra { --pc: var(--mf-rosa); --pt: var(--mf-viola-blu); }
+
+/* Mappa a sinistra (fissa mentre scorri), filtri ed elenco a destra; su telefono uno sotto l'altro */
+.prog-sezione { padding-block: clamp(32px, 5vw, 64px) var(--spazio-sezione); }
+.prog { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
+.prog__mappa { min-width: 0; }
+.prog__elenco { min-width: 0; }
+.prog__mappa .h3, .prog__elenco .h3 { margin-bottom: 16px; }
+
+.mappa-scorri { max-width: 100%; }
+.mappa-scorri:focus-visible { outline: var(--focus-anello); }
+.mappa { position: relative; width: 100%; max-width: 100%; background: #F4F5F4; }
+.mappa__fondo { display: block; width: 100%; height: auto; }
+.mappa__servizi { position: absolute; inset: 0; pointer-events: none; }
+.servizio { position: absolute; width: 22px; height: 22px; transform: translate(-50%, -50%); }
+/* Didascalia compatta: legenda in una riga + interruttore servizi + una nota breve */
+.mappa__comandi { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px; margin-top: 12px; }
+.mappa__comandi .legenda { margin: 0; }
+.mappa__casella { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.mappa__casella input { appearance: none; position: relative; width: 40px; height: 24px; margin: 0; border: 2px solid var(--mf-bianco); border-radius: 999px; background: transparent; cursor: pointer; }
+.mappa__casella input::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 999px; background: var(--mf-bianco); transition: transform .15s ease; }
+.mappa__casella input:checked { background: var(--mf-bianco); }
+.mappa__casella input:checked::after { transform: translateX(16px); background: var(--mf-viola-blu); }
+.mappa__casella input:focus-visible { outline: var(--focus-anello); outline-offset: 3px; }
+.mappa__punti { position: absolute; inset: 0; }
+.mappa__arrivo { position: absolute; left: 12px; bottom: 10px; margin: 0; font-size: 13px; color: var(--mf-bianco); }
+.punto {
+  position: absolute; transform: translate(-50%, -50%);
+  min-width: 30px; height: 30px; padding: 0 5px; border-radius: 999px;
+  border: 2px solid var(--mf-bianco); background: var(--pc); color: var(--pt);
+  font: inherit; font-size: 13px; font-weight: 700; line-height: 1; cursor: pointer;
+  box-shadow: 0 1px 4px rgba(37, 27, 75, .35);
+  transition: transform .15s ease;
+}
+.punto:hover, .punto--acceso { transform: translate(-50%, -50%) scale(1.25); z-index: 2; }
+.punto[aria-pressed="true"] { background: var(--mf-bianco); color: var(--mf-viola-blu); border-color: var(--pc); border-width: 4px; z-index: 3; }
+.punto--corso::after { content: ""; position: absolute; inset: -7px; border-radius: 999px; border: 2px dashed var(--mf-bianco); }
+.mappa__nota { margin: 4px 0 0; font-size: 14px; line-height: 1.45; }
+.legenda { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 12px 0 0; padding: 0; list-style: none; font-size: 14px; }
+.legenda li { display: inline-flex; align-items: center; gap: 6px; }
+.legenda__segno { width: 14px; height: 14px; border-radius: 999px; background: var(--pc); border: 2px solid var(--mf-bianco); }
+
+/* Filtri */
+.filtri { display: grid; gap: 16px; margin-bottom: 16px; }
+.filtri__etichetta { margin: 0 0 8px; font-size: var(--occhiello-size); font-weight: 700; letter-spacing: var(--occhiello-tracking); text-transform: uppercase; }
+.filtri__bottoni { display: flex; flex-wrap: wrap; gap: 8px; }
+.filtro {
+  min-height: 44px; padding: 0 18px; border: 2px solid currentColor; border-radius: var(--raggio-bottone);
+  background: transparent; color: inherit; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer;
+}
+.filtro[aria-pressed="true"] { background: var(--mf-bianco); color: var(--mf-viola-blu); border-color: var(--mf-bianco); font-weight: 700; }
+.filtro--luogo { background: var(--mf-bianco); color: var(--mf-viola-blu); border-color: var(--mf-bianco); font-weight: 700; align-self: end; }
+.filtri__riga { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: end; }
+.filtri__campo { margin: 0; display: grid; gap: 6px; font-size: 15px; font-weight: 600; }
+.filtri__campo select {
+  min-height: 44px; min-width: 180px; padding: 0 12px; border: 2px solid currentColor; border-radius: 0;
+  background: var(--mf-viola-blu); color: inherit; font: inherit; font-size: 16px;
+}
+.prog__conteggio { margin: 0 0 8px; font-size: 15px; }
+
+/* Griglia di schede come la tavola T4 di Sarah: schede senza fondo sul viola, foto 4:3,
+   occhiello con la tipologia, titolo, artista, giorno · ora · luogo.
+   3 colonne sul computer (minimo 340 px, distanza 48 px). Sul telefono 2 colonne più piccole
+   (nella T4 sarebbe 1 colonna): PROPOSTA per accorciare la pagina, da validare con Sarah. */
+.carte { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 48px; align-items: start; }
+.carta { position: relative; }
+.carta__img, .carta .pfoto { display: block; width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+.carta__tipo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 20px 0 8px; font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.carta__tipo .legenda__segno { width: 12px; height: 12px; border-width: 1.5px; }
+.carta__titolo { margin: 0 0 8px; font-size: 26px; line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
+.carta__titolo button { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.carta__titolo button::after { content: ""; position: absolute; inset: 0; } /* tutta la scheda è cliccabile */
+.carta__titolo button:focus-visible { outline: none; }
+.carta:has(button:focus-visible) { outline: 3px solid var(--mf-bianco); outline-offset: 6px; }
+.carta:hover .carta__titolo button { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.carta__artista { margin: 0 0 8px; font-size: 18px; font-weight: 500; }
+.carta__quando { margin: 0; font-size: 16px; }
+@media (max-width: 640px) {
+  .carte { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 12px; }
+  .carta__tipo { margin: 10px 0 4px; font-size: 11px; letter-spacing: .04em; gap: 6px; }
+  .carta__titolo { margin-bottom: 4px; font-size: 17px; line-height: 1.2; }
+  .carta__artista { margin-bottom: 4px; font-size: 14px; }
+  .carta__quando { font-size: 13px; line-height: 1.4; }
+  .carta:has(button:focus-visible) { outline-offset: 3px; }
+}
+.carta__mappa { margin-top: 8px; min-height: 32px; padding: 0 14px; border: 1px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 14px; cursor: pointer; }
+.etichetta-stato { display: inline-block; margin-left: 8px; padding: 2px 8px; background: var(--mf-bianco); color: var(--mf-viola-blu); border-radius: 999px; }
+.prog-vuoto { padding: 24px 0; }
+
+/* Foto (segnaposto finché non arrivano le foto degli artisti) */
+.pfoto { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 1; width: 100%; background: var(--pc); color: var(--pt); overflow: hidden; }
+.pfoto img { width: 60%; height: auto; }
+.pfoto--grande { aspect-ratio: 4 / 3; }
+.pfoto--grande img { width: 34%; }
+.pfoto__nota { position: absolute; top: 18px; left: clamp(20px, 4vw, 40px); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Scheda in finestra */
+.scheda { width: min(860px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0; background: var(--mf-viola-blu); color: var(--mf-bianco); overflow-y: auto; }
+.scheda::backdrop { background: rgba(37, 27, 75, .75); }
+.scheda__chiudi {
+  position: sticky; top: 12px; float: right; z-index: 5; margin: 12px 12px -56px 0;
+  width: 44px; height: 44px; border: 2px solid var(--mf-viola-blu); border-radius: 999px;
+  background: var(--mf-bianco); color: var(--mf-viola-blu); font-size: 26px; line-height: 1; cursor: pointer;
+}
+.scheda__testa { position: relative; }
+.scheda__sopra { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px clamp(20px, 4vw, 40px); background: linear-gradient(transparent, rgba(37, 27, 75, .92) 45%); color: var(--mf-bianco); }
+.scheda__sopra .occhiello { margin-bottom: 8px; }
+.scheda__titolo { margin: 0; font-size: clamp(30px, 5vw, 52px); line-height: 1.04; letter-spacing: -.03em; font-weight: 700; text-wrap: balance; }
+.scheda__artista { margin: 8px 0 0; font-size: 20px; }
+.scheda__corpo { padding: 32px clamp(20px, 4vw, 40px) 8px; }
+.scheda__corpo p { max-width: var(--larghezza-testo); font-size: 18px; line-height: 1.6; }
+.scheda__corpo .h3 { margin-top: 32px; }
+.scheda__dati { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px; margin: 0; }
+.scheda__dati div { padding: 14px 16px; border: 1px solid var(--mf-filetto-su-viola); }
+.scheda__dati dt { margin: 0 0 4px; font-size: 13px; font-weight: 700; letter-spacing: var(--occhiello-tracking); text-transform: uppercase; }
+.scheda__dati dd { margin: 0; font-size: 17px; font-weight: 600; }
+.scheda__alert { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 12px; margin: 12px 0 0; padding: 0; list-style: none; }
+.scheda__alert li { padding: 14px 16px; background: var(--mf-rosa); color: var(--mf-viola-blu); font-weight: 700; }
+.scheda__link a { color: inherit; font-weight: 700; }
+.scheda__piede { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px clamp(20px, 4vw, 40px) 32px; border-top: 1px solid var(--mf-filetto-su-viola); }
+.scheda__piede .bottone { background: transparent; cursor: pointer; }
+.scheda__piede .bottone[disabled] { opacity: .4; cursor: default; }
+.scheda__posizione { margin: 0; font-size: 15px; }
+
+@media (max-width: 960px) {
+  .prog { grid-template-columns: minmax(0, 1fr); }
+  .mappa-scorri { overflow-x: auto; margin-inline: calc(var(--margine-laterale) * -1); }
+  .mappa-scorri .mappa { min-width: 1000px; }
+  .prog__mappa { position: static; }
+  .scheda__sopra { position: static; background: var(--mf-viola-blu); }
+}
+@media (prefers-reduced-motion: reduce) { .punto, .mappa__casella input::after { transition: none; } }
+
+/* Versione accessibile: bianco e nero */
+html.accessibile .mappa { background: #FFF; border: 2px solid #000; }
+html.accessibile .mappa__fondo { filter: grayscale(1); }
+html.accessibile .servizio, html.accessibile .legenda--servizi img { filter: grayscale(1) contrast(1.4); }
+html.accessibile .punto, html.accessibile .legenda__segno { background: #FFF !important; color: #000 !important; border-color: #000 !important; }
+html.accessibile .punto[aria-pressed="true"], html.accessibile .filtro[aria-pressed="true"], html.accessibile .filtro--luogo, html.accessibile .etichetta-stato { background: #000 !important; color: #FFF !important; }
+html.accessibile .filtro, html.accessibile .filtri__campo select, html.accessibile .carta__mappa { background: #FFF; color: #000; border-color: #000; }
+html.accessibile .pfoto:not(:has(.pfoto__img)) { display: none; }
+html.accessibile .carta__img { filter: grayscale(1); }
+html.accessibile .carta:has(button:focus-visible) { outline-color: #000; }
+html.accessibile .tendina summary, html.accessibile .scheda__righe div, html.accessibile .tendina { border-color: #000; }
+html.accessibile .scheda, html.accessibile .scheda__sopra { background: #FFF !important; color: #000 !important; }
+html.accessibile .scheda__alert li { background: #FFF; color: #000; border: 2px solid #000; }
+html.accessibile .scheda__dati div { border-color: #000; }
+html.accessibile .anteprima-periodo { background: #000; }
+html.accessibile .scheda__sopra { position: static; }
+.solo-prototipo { margin: 12px 0 0; font-size: 15px; } .solo-prototipo a { color: inherit; font-weight: 700; }
+
+/* Foto e post degli artisti */
+.pfoto__img { width: 100% !important; height: 100%; object-fit: cover; }
+.scheda__testa--post { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: end; background: var(--mf-viola-profondo); }
+.scheda__post { display: block; width: 100%; height: auto; }
+.scheda__testa--post .scheda__sopra { position: static; background: none; }
+.scheda__foto { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.scheda__foto--verticale { aspect-ratio: auto; max-height: 70vh; width: auto; margin: 0 auto; }
+.scheda__testa--foto { background: var(--mf-viola-profondo); }
+@media (max-width: 640px) {
+  .scheda__testa--post { grid-template-columns: minmax(0, 1fr); }
+}
+/* Telefono: mappa intera, senza scorrimento laterale, punti più piccoli */
+@media (max-width: 960px) {
+  .mappa-scorri { overflow-x: visible !important; margin-inline: 0 !important; }
+  .mappa-scorri .mappa { min-width: 0 !important; }
+  .punto { min-width: 20px; height: 20px; padding: 0 3px; font-size: 10px; border-width: 1.5px; }
+  .servizio { width: 13px; height: 13px; }
+  .punto--corso::after { inset: -4px; }
+}
+html.accessibile .pfoto__img, html.accessibile .scheda__post, html.accessibile .scheda__foto { filter: grayscale(1); }
+
+/* Categoria Servizi: elenco delle icone, senza colore di tipologia */
+.carta--servizio { flex-direction: row; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--mf-filetto-su-viola); }
+.carta--servizio .pfoto { width: 48px; aspect-ratio: 1; flex: none; background: transparent; }
+.carta--servizio .pfoto__icona { width: 40px !important; height: 40px; object-fit: contain; }
+.carta--servizio .carta__testo { padding: 0; }
+.mappa__servizi--grandi .servizio { width: 30px; height: 30px; }
+@media (max-width: 960px) { .mappa__servizi--grandi .servizio { width: 18px; height: 18px; } }
+
+/* Telefono: filtri più compatti, giorno e ora affiancati */
+@media (max-width: 640px) {
+  .filtri__bottoni { gap: 6px; }
+  .filtro { padding: 0 14px; font-size: 14px; }
+  .filtri__riga { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .filtri__campo select { min-width: 0; width: 100%; font-size: 15px; }
+  .filtro--luogo { grid-column: 1 / -1; justify-self: start; }
+  .prog { gap: 32px; }
+}
+
+/* Scheda attività: info principali subito, poi tendine (Alert, Descrizione, Bio).
+   Righe informazioni come la tavola T5 di Sarah (etichetta a sinistra, valore a destra, filetto sopra). */
+.scheda__cura { margin: 0 0 20px; font-size: 18px; line-height: 1.5; font-weight: 500; }
+.scheda__righe { margin: 0; }
+.scheda__righe div { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; border-top: 1px solid var(--mf-filetto-su-viola); }
+.scheda__righe dt { margin: 0; font-size: 16px; font-weight: 700; }
+.scheda__righe dd { margin: 0; font-size: 16px; text-align: right; }
+.scheda__azioni { margin: 20px 0 0; }
+.scheda__azioni .bottone { background: transparent; cursor: pointer; }
+.tendine { margin-top: 28px; border-bottom: 1px solid var(--mf-filetto-su-viola); }
+.tendina { border-top: 1px solid var(--mf-filetto-su-viola); }
+.tendina summary { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 0; cursor: pointer; list-style: none; }
+.tendina summary::-webkit-details-marker { display: none; }
+.tendina summary::after { content: "+"; margin-left: auto; width: 32px; height: 32px; border: 2px solid currentColor; border-radius: 999px; display: grid; place-items: center; font-size: 20px; line-height: 1; flex: none; }
+.tendina[open] summary::after { content: "–"; }
+.tendina summary:focus-visible { outline: var(--focus-anello); outline-offset: 2px; }
+.tendina__titolo { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.tendina__extra { display: inline-block; min-width: 26px; padding: 0 8px; border-radius: 999px; background: var(--mf-rosa); color: var(--mf-viola-blu); font-size: 14px; font-weight: 700; text-align: center; }
+.tendina--vuota p { display: flex; align-items: center; gap: 10px; min-height: 56px; margin: 0; }
+.tendina--vuota .tendina__extra { background: none; color: inherit; padding: 0; font-weight: 400; font-size: 16px; }
+.tendina__corpo { padding: 0 0 20px; }
+.tendina__corpo .scheda__alert { margin-top: 0; }
+.scheda__freccia { width: 48px; height: 48px; border: 2px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 20px; cursor: pointer; }
+.scheda__freccia[disabled] { opacity: .4; cursor: default; }
+.scheda__img { display: block; }
+@media (max-width: 640px) {
+  .scheda__testa--post .scheda__post, .scheda__img img { aspect-ratio: 4 / 3; width: 100%; height: auto; object-fit: cover; max-height: none; }
+  .scheda__titolo { font-size: 30px; }
+  .scheda__artista { font-size: 17px; }
+  .scheda__sopra { padding: 18px 20px; }
+  .scheda__corpo { padding: 20px 20px 4px; }
+  .scheda__righe div { padding: 11px 0; }
+  .scheda__righe dt, .scheda__righe dd { font-size: 15px; }
+  .tendina__titolo { font-size: 19px; }
+  .tendine { margin-top: 20px; }
+  .scheda__piede { padding: 16px 20px 20px; justify-content: space-between; }
+}
+@media (prefers-reduced-motion: no-preference) { .tendina[open] .tendina__corpo { animation: tendina-apri .18s ease-out; } }
+@keyframes tendina-apri { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+/* ==========================================================================
+   ELENCO A RIGHE (sostituisce la griglia) · PROPOSTA DA VALIDARE CON SARAH
+   Telefono: solo testo (nome; tipologia · orario), a destra pin della mappa e freccia.
+   Computer (≥900 px): foto piccola 16:10 e colonne Attività, Tipologia, Quando, Dove.
+   Con "Tutto" un titolo per tipologia. Clic sulla riga = scheda.
+   ========================================================================== */
+.prog-elenco { min-width: 0; }
+.righe { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--mf-filetto-su-viola); }
+.righe-sez { display: flex; align-items: center; gap: 10px; margin: 40px 0 8px; font-size: clamp(24px, 3.2vw, 32px); line-height: 1.1; letter-spacing: -.025em; font-weight: 700; }
+.righe-sez:first-child { margin-top: 8px; }
+.righe-sez .legenda__segno { width: 14px; height: 14px; }
+.righe-sez small { font-size: 14px; font-weight: 500; letter-spacing: 0; }
+.righe-intest { display: none; }
+.riga { position: relative; border-top: 1px solid var(--mf-filetto-su-viola); }
+.riga__apri { position: absolute; inset: 0; z-index: 2; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.riga__apri:focus-visible { outline: none; box-shadow: none; }
+.riga:has(.riga__apri:focus-visible) { outline: 3px solid var(--mf-bianco); outline-offset: -3px; }
+.riga:hover { background: rgba(255, 255, 255, .08); }
+.riga:hover .riga__nome { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.riga__dentro { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 4px 10px; align-items: center; padding: 12px 2px 12px 0; }
+.riga__foto, .riga__col, .riga__artista { display: none; }
+.riga__nome { margin: 0; font-size: 17px; line-height: 1.25; font-weight: 700; letter-spacing: -.01em; }
+.riga__info { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; margin: 3px 0 0; font-size: 13px; font-variant-numeric: tabular-nums; }
+.riga__tipo { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.riga__tipo .legenda__segno { width: 10px; height: 10px; border-width: 1.5px; }
+.righe--gruppo .riga__info .riga__tipo { display: none; } /* sotto il titolo di sezione la tipologia è già detta */
+.riga__dove { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; max-width: 90px; }
+.riga__pin { display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 5px; border-radius: 999px; background: var(--pc); color: var(--pt); border: 2px solid var(--mf-bianco); font-size: 11px; font-weight: 700; line-height: 1; }
+.riga__giro { font-size: 12px; }
+.riga__freccia { font-size: 20px; line-height: 1; }
+.riga .etichetta-stato { font-size: 11px; vertical-align: 2px; }
+
+
+@media (min-width: 900px) {
+  .righe-intest { display: grid; grid-template-columns: 168px minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, .7fr) 24px; gap: 0 24px; padding: 0 2px 8px 0; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .riga__dentro { grid-template-columns: 168px minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, .7fr) 24px; gap: 0 24px; padding: 14px 2px 14px 0; }
+  .riga__foto { display: block; width: 168px; aspect-ratio: 16 / 10; height: auto; object-fit: cover; background: var(--mf-viola-profondo); }
+  .riga__foto--disegno { display: grid; place-items: center; background: var(--mf-giallo); }
+  .riga__foto--disegno img { width: 44%; height: auto; }
+  .riga__info { display: none; }
+  .riga__artista { display: block; margin: 2px 0 0; font-size: 15px; }
+  .riga__nome { font-size: 20px; }
+  .riga__col { display: flex; align-items: center; gap: 6px; font-size: 15px; font-variant-numeric: tabular-nums; }
+  .riga__col--tipo { font-weight: 600; }
+  .riga__dove { justify-content: flex-start; max-width: none; }
+}
+html.accessibile .riga__foto { filter: grayscale(1); }
+html.accessibile .riga:hover { background: #EEE; }
+html.accessibile .riga:has(.riga__apri:focus-visible) { outline-color: #000; }
+html.accessibile .riga__pin { background: #FFF !important; color: #000 !important; border-color: #000 !important; }
+html.accessibile .righe, html.accessibile .riga { border-color: #000; }
